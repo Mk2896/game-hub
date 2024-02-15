@@ -12,8 +12,8 @@ export default function GameHubMain() {
     setGameQuery({ ...gameQuery, genres });
   };
 
-  const selectPlatform = (platform: string) => {
-    setGameQuery({ ...gameQuery, platform });
+  const selectPlatform = (platform?: string) => {
+    setGameQuery({ ...gameQuery, parent_platforms: platform });
   };
 
   const selectOrder = (ordering: string) => {

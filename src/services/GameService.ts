@@ -33,7 +33,7 @@ export const defaultGames = (index: number) => {
 
 export interface GamesQuery {
   genres?: string;
-  platform?: string;
+  parent_platforms?: string;
   search?: string;
   ordering?: string;
 }
