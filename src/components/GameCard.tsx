@@ -5,7 +5,6 @@ import {
   HStack,
   Heading,
   Icon,
-  Image,
   Skeleton,
   SkeletonCircle,
   SkeletonText,
