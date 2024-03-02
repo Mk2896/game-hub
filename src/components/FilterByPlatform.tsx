@@ -12,32 +12,25 @@ export default function FilterByPlatform({
   selectedFilter,
   platforms,
 }: FilterByPlatform) {
-
-
   return (
     <Menu>
-      <MenuButton marginLeft={5} as={Button} rightIcon={<BsChevronDown />}>
-        {platforms.find((platform) => platform.id.toString() === selectedFilter)?.name ??
-          "Select Platform"}
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+        {platforms.find((platform) => platform.id.toString() === selectedFilter)
+          ?.name ?? "Select Platform"}
       </MenuButton>
       <MenuList>
-        <MenuItem
-          onClick={() => selectFilter()}
-          key={0}
-          value={''}
-        >
+        <MenuItem onClick={() => selectFilter()} key={0} value={""}>
           Select Platform
         </MenuItem>
-        {
-          platforms.map((platform) => (
-            <MenuItem
-              onClick={() => selectFilter(platform.id.toString())}
-              key={platform.id}
-              value={platform.slug}
-            >
-              {platform.name}
-            </MenuItem>
-          ))}
+        {platforms.map((platform) => (
+          <MenuItem
+            onClick={() => selectFilter(platform.id.toString())}
+            key={platform.id}
+            value={platform.slug}
+          >
+            {platform.name}
+          </MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );

@@ -45,7 +45,13 @@ export default function GameCard({ game, isLoading }: GameCardProps) {
   return (
     <Card borderRadius={10} overflow={"hidden"}>
       <Skeleton isLoaded={!isLoading}>
-        <Image src={cropImages(game.background_image)} objectFit={"cover"} />
+        <Box
+          height={250}
+          bgImg={cropImages(game.background_image)}
+          bgSize={"cover"}
+          bgRepeat={"no-repeat"}
+          bgPosition={"center top"}
+        ></Box>
       </Skeleton>
       <CardBody>
         <SkeletonText isLoaded={!isLoading}>

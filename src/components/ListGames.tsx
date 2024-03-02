@@ -1,4 +1,4 @@
-import { Heading, SimpleGrid } from "@chakra-ui/react";
+import { Grid, Heading, SimpleGrid } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import useGames, { GamesQuery, defaultGames } from "../services/GameService";
 import SortGameMenu from "./SortGameMenu";
@@ -16,20 +16,40 @@ export default function ListGames({
   selectPlatform,
   selectOrder,
 }: ListGamesProps) {
-
   const { data: platforms, isLoading: isLoadingPlatform } = usePlatforms();
   const { data: games, isLoading } = useGames(query);
 
   return (
     <>
       <Heading>
-      {platforms.find((platform) => platform.id.toString() === query.parent_platforms)?.name} {query?.genres} Games
+        {
+          platforms.find(
+            (platform) => platform.id.toString() === query.parent_platforms
+          )?.name
+        }{" "}
+        {query?.genres} Games
       </Heading>
-      <SortGameMenu selectOrder={selectOrder} selectedOrder={query.ordering} />
-      {
-        !isLoadingPlatform ?
-          <FilterByPlatform selectFilter={selectPlatform} selectedFilter={query.parent_platforms} platforms={platforms} /> : null
-      }
+      <Grid
+        padding={"10px"}
+        templateColumns={{
+          base: "1fr",
+          md: "1fr 1fr 1fr",
+          xl: "1fr 1fr 3fr",
+        }}
+        gridGap={5}
+      >
+        <SortGameMenu
+          selectOrder={selectOrder}
+          selectedOrder={query.ordering}
+        />
+        {!isLoadingPlatform ? (
+          <FilterByPlatform
+            selectFilter={selectPlatform}
+            selectedFilter={query.parent_platforms}
+            platforms={platforms}
+          />
+        ) : null}
+      </Grid>
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} padding="10px" spacing={4}>
         {(!isLoading
           ? games
