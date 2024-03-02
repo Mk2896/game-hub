@@ -1,4 +1,5 @@
 import useData from "../hooks/useData";
+import { Genres } from "./GenreService";
 import { Platform } from "./PlatformService";
 
 export interface Game {
@@ -32,12 +33,23 @@ export const defaultGames = (index: number) => {
 };
 
 export interface GamesQuery {
-  genres?: string;
-  parent_platforms?: string;
+  genres?: Genres;
+  parent_platforms?: Platform;
   search?: string;
   ordering?: string;
 }
 
-const useGames = (query?: GamesQuery) => useData<Game>("/games", query);
+const useGames = (query?: GamesQuery) =>
+  useData<Game>(
+    "/games",
+    {
+      params: {
+        ...query,
+        genres: query?.genres?.id,
+        parent_platforms: query?.parent_platforms?.id,
+      },
+    },
+    [query]
+  );
 
 export default useGames;

@@ -3,11 +3,11 @@ import GameCard from "./GameCard";
 import useGames, { GamesQuery, defaultGames } from "../services/GameService";
 import SortGameMenu from "./SortGameMenu";
 import FilterByPlatform from "./FilterByPlatform";
-import usePlatforms from "../services/PlatformService";
+import usePlatforms, { Platform } from "../services/PlatformService";
 
 interface ListGamesProps {
   query: GamesQuery;
-  selectPlatform: (platforms?: string) => void;
+  selectPlatform: (platforms?: Platform) => void;
   selectOrder: (ordering: string) => void;
 }
 
@@ -22,19 +22,14 @@ export default function ListGames({
   return (
     <>
       <Heading>
-        {
-          platforms.find(
-            (platform) => platform.id.toString() === query.parent_platforms
-          )?.name
-        }{" "}
-        {query?.genres} Games
+        {query.parent_platforms?.name} {query?.genres?.name} Games
       </Heading>
       <Grid
         padding={"10px"}
         templateColumns={{
           base: "1fr",
-          md: "1fr 1fr 1fr",
-          xl: "1fr 1fr 3fr",
+          md: "1fr 1fr 0.5fr",
+          xl: "1fr 1fr 2fr",
         }}
         gridGap={5}
       >

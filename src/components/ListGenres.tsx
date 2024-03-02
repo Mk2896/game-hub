@@ -1,4 +1,4 @@
-import getGenres, { defaultGenre } from "../services/GenreService";
+import getGenres, { Genres, defaultGenre } from "../services/GenreService";
 import {
   Badge,
   HStack,
@@ -13,8 +13,8 @@ import {
 import cropImages from "../services/crop-images";
 
 interface ListGenresProps {
-  selectGenre: (genres: string) => void;
-  selectedGenre?: string;
+  selectGenre: (genres: Genres) => void;
+  selectedGenre?: Genres;
 }
 export default function ListGenres({
   selectGenre,
@@ -48,12 +48,12 @@ export default function ListGenres({
                   <Text
                     fontSize="lg"
                     as={
-                      selectedGenre && selectedGenre === genre.slug
+                      selectedGenre && selectedGenre.slug === genre.slug
                         ? "b"
                         : "u"
                     }
                     cursor="pointer"
-                    onClick={() => selectGenre(genre.slug)}
+                    onClick={() => selectGenre(genre)}
                   >
                     {genre.name}
                   </Text>

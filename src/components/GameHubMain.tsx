@@ -4,15 +4,17 @@ import ListGenres from "./ListGenres";
 import ListGames from "./ListGames";
 import { useState } from "react";
 import { GamesQuery } from "../services/GameService";
+import { Platform } from "../services/PlatformService";
+import { Genres } from "../services/GenreService";
 
 export default function GameHubMain() {
   const [gameQuery, setGameQuery] = useState<GamesQuery>({});
 
-  const selectGenre = (genres: string) => {
+  const selectGenre = (genres: Genres) => {
     setGameQuery({ ...gameQuery, genres });
   };
 
-  const selectPlatform = (platform?: string) => {
+  const selectPlatform = (platform?: Platform) => {
     setGameQuery({ ...gameQuery, parent_platforms: platform });
   };
 
